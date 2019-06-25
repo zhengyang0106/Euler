@@ -16,7 +16,7 @@ int main() {
 
     while (f[n % 2][0] < 1000) {
         n++;
-        int n0 = n & 1, n1 = n0 ^ 1;
+        int n0 = n & 1, n1 = n0 ^ 1;  
         for (int i = 1; i <= f[n1][0]; i++) {
             f[n0][i] += f[n1][i];
         }
