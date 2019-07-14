@@ -13,6 +13,41 @@ long long  Pentagonal(long long n) {
     return  n * (3 * n - 1) / 2;
 }
 
+int binary_search(long long (*f)(long long), long long n, long long x) {
+    long long head = 1, mid,tail = n; 
+    while(head <= tail) {
+    mid = (tail + head) / 2;
+    if (f(mid) == x) return mid;
+    if (f(mid) > x) tail = mid - 1;
+    else  head = mid + 1;
+    
+    }
+    return 0;
+}
+
+int main() {
+    long long  pk, pj, D = INF;
+    long long  n = 2;
+    while (Pentagonal(n) - Pentagonal(n - 1) < D) {
+        pk = Pentagonal(n);
+        for (int i = n -1; i >= 1; i--){
+            pj = Pentagonal(i);
+            if (pk - pj >= D) break;
+            int ans1 = binary_search(Pentagonal,2 * n, pk + pj);
+            int ans2 = binary_search(Pentagonal,n, pk - pj);
+            if (ans1 && ans2){ 
+                D = pk -pj;
+            }   
+        }
+        n++;
+    }
+    cout << D <<endl;
+
+    return 0;
+}
+
+
+/*
 int binary_search (long long (*func)(long long), long long n, long long x) {
     long long head = 1, tail = n, mid;
     while (head <= tail) {
@@ -42,4 +77,5 @@ int main() {
     }
     cout << D << endl;
     return 0;
-}
+}*/
+
